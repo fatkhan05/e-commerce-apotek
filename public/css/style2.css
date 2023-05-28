@@ -1,0 +1,69 @@
+body {
+    text-align:center;
+    min-height: 2000px;
+}
+
+.hero {
+    flex-wrap: wrap;
+    padding: 6rem;
+}
+
+.header {
+    font-family: "Poltawski Nowy";
+    font-size: 60px;
+    padding-top: 6rem;
+}
+
+p {
+    font-family: "Montserrat";
+    opacity: 50%;
+    padding-bottom: 4rem;
+}
+
+.img {
+    width: 40rem;
+    height: 30rem;
+}
+
+navbar{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    height:70px;
+    background-color: #159895;
+    background-image: linear-gradient(to right, #159895, #019267);   
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+img {
+    width: 80px;
+    height: 60px;
+}
+
+.about h1 {
+    text-align: center;
+    height: 30rem;
+    padding: 3rem;
+    color: #fff;
+    background-color: #019267;
+}
+
+img {
+    padding-top: rem;
+}
+
+button {
+    border: none;
+    color: #fff;
+    background-color: blue;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px;
+}

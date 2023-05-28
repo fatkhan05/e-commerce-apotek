@@ -1,0 +1,50 @@
+@extends('layouts.main')
+@section('container')
+    
+
+<h1><center>Tambah Suplier</center></h1>
+<br/>   
+
+
+
+
+<form action='{{ url('Distributor/'. $distributor->id_suplier) }}' method='post'>
+    @csrf
+    @method('PUT')
+    @csrf 
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <a href='{{ url('Distributor') }}' class="btn btn-secondary"><< kembali</a>
+        <div class="mb-3 row">
+            <label for="id" class="col-sm-2 col-form-label"><b>ID SUPLIER</b></label>
+            <div class="col-sm-10">
+                 {{ $distributor->id_suplier}}
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="nama" class="col-sm-2 col-form-label"><b>NAMA SUPLIER</b></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name='nama_suplier' value="{{ $distributor->nama_suplier }}" id="nama_suplier">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="no" class="col-sm-2 col-form-label"><b>NOMOR TELEPON</b></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name='no_telepon' value="{{ $distributor->no_telepon }}" id="no_telepon">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="alamat" class="col-sm-2 col-form-label"><b>ALAMAT</b></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name='alamat' value="{{ $distributor->alamat }}" id="alamat">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="jurusan" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10"><button type="submit" class="btn btn-primary" name="submit">SIMPAN</button></div>
+        </div>
+    </div>
+    </form>
+    <!-- AKHIR FORM -->
+
+
+@endsection
