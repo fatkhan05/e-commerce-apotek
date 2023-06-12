@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
+use function PHPUnit\Framework\returnSelf;
+
 class LoginController extends Controller
 {
     // use AuntheticatesUsers;
@@ -36,6 +38,17 @@ class LoginController extends Controller
             'email' => 'Mohon maaf email anda belum terdaftar',
             'password' => 'Password yang anda masukkan tidak tepat',
         ]);                                         
+    }
+
+    public function redirectTo()
+    {
+        if (Auth::user()->is_admin == 'admin') {
+            $this->redirectTo = route('Obat');
+            return $this->redirectTo;
+        } else {
+            $this->redirectTo = route('Obat', Auth::user()->id);
+            return $this->redirectTo;
+        }
     }
 
     public function logout(Request $request)

@@ -15,16 +15,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_paid')->default(false);
-            $table->string('payment_receipt')->nullable();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('order_id');
+            $table->string('product_name');
+            $table->integer('quantity');
+            $table->bigInteger('total_price');
+            $table->enum('status', ['Unpaid' , 'Paid']);
+            $table->string('snap_token', 36)->nullable();
             $table->timestamps();
-            // $table->id('order_id');
-            // $table->string('product_details');
-            // $table->integer('price');
-            // $table->integer('quantity');
-            // $table->integer('total');
-            // $table->timestamps();
         });
     }
 

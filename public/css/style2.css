@@ -1,6 +1,6 @@
 body {
     text-align:center;
-    min-height: 2000px;
+    /* min-height: 1000px; */
 }
 
 .hero {
@@ -30,8 +30,10 @@ navbar{
     justify-content: space-between;
     position: fixed;
     height:70px;
-    background-color: #159895;
-    background-image: linear-gradient(to right, #159895, #019267);   
+    font-color: black;
+    margin-bottom: 50rem;
+    /* background-color: #159895;
+    background-image: linear-gradient(to right, #159895, #019267);    */
     top: 0;
     left: 0;
     right: 0;
@@ -58,7 +60,7 @@ img {
 button {
     border: none;
     color: #fff;
-    background-color: blue;
+    background-color:  #019267;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -66,4 +68,20 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 25px;
+}
+
+.navbar-nav {
+    cursor: pointer;
+}
+
+.navbar-nav .dropdown .dropdown-menu {
+    left: -120px;
+}
+
+footer {
+    background-color: #159895;
+    background-image: linear-gradient(to right, #159895, #019267);
+    position: absolute;
+    width: 100%;
+    height: 25rem;
 }

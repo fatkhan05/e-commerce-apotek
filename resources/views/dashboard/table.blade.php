@@ -279,48 +279,25 @@
                       <thead>
                         <tr>
                           <th>Id</th>
-                          <th>Product Id</th>
-                          <th>Order Id</th>
-                          <th>Amount</th>
+                          <th>Id Trsansaksi</th>
+                          <th>Id Barang</th>
+                          <th>Jumlah</th>
+                          <th>Tanggal</th>
                           <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>001</td>
-                          <td>12 May 2017</td>
-                          <td>12</td>
-                          <td><label class="badge badge-danger">Pending</label></td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>002</td>
-                          <td>15 May 2017</td>
-                          <td>15</td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>003</td>
-                          <td>14 May 2017</td>
-                          <td>14</td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>004</td>
-                          <td>16 May 2017</td>
-                          <td>16</td>
-                          <td><label class="badge badge-success">Completed</label></td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>005</td>
-                          <td>20 May 2017</td>
-                          <td>20</td>
-                          <td><label class="badge badge-danger">Pending</label></td>
-                        </tr>
+                          @foreach ($transaksi as $item)
+                              
+                          <tr>
+                            <td>{{ $transaksi->id }}</td>
+                            <td>{{ $transaksi->order_id }}</td>
+                            <td>{{ $transaksi->product_id }}</td>
+                            <td>{{ $transaksi->amount }}</td>
+                            {{-- <td>{{ $transaksi->tatus }}</td> --}}
+                            <td><label class="badge badge-danger">Pending</label></td>
+                          </tr>
+                          @endforeach
                       </tbody>
                     </table>
                   </div>

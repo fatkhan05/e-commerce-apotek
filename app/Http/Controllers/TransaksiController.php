@@ -16,6 +16,10 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::all();
 
+        $totalAmount = 0;
+            foreach ($transaksi as $item) {
+                $totalAmount += $item->amount;
+            }
         return view('transaksi.index')->with('transaksi', $transaksi);        
     }
 

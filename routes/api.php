@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\TransaksiController;
 use App\Http\Controllers\API\ObatController;
+use App\Http\Controllers\CheckOutController;
 // use App\Http\Controllers\ObatController;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
@@ -23,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('obat2', ObatController::class);
+
+Route::post('midtrans-callback', [CheckOutController::class, 'callback']);

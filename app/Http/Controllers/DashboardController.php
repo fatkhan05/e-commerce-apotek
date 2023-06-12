@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -24,7 +25,8 @@ class DashboardController extends Controller
 
     public function table() {
 
-        return view('dashboard.table');
+        $transaksi = Transaksi::all();
+        return view('dashboard.table', compact('transaksi'));
     }
 
     public function blank() {

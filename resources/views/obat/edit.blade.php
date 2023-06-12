@@ -4,7 +4,7 @@
     <br/>   
 
     <!-- START FORM -->
-    <form action='{{ url('Obat/'. $obat->id_obat) }}' method='post'>
+    <form action='{{ url('Obat/'. $obat->id) }}' method='POST' enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="my-3 p-4 bg-body rounded shadow-lg">
@@ -12,7 +12,7 @@
             <div class="mb-3 row">
                 <label for="id" class="col-sm-2 col-form-label">ID OBAT</label>
                 <div class="col-sm-10">
-                    {{ $obat->id_obat}}
+                    {{ $obat->id}}
                 </div>
             </div>
             <div class="mb-3 row">
@@ -46,9 +46,16 @@
                 </div>
             </div>
             <div class="mb-3 row">
+                <label for="image" class="col-sm-2 col-form-label"> <b> IMAGE </b></label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" name="foto" value="{{ $obat->image }}" placeholder="image" id="foto">
+                    <img style="width: 10rem; height: 10rem;" src="{{ asset('foto/'.$obat->image) }}" alt="">
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label for="jurusan" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <a href="{{ url('Obat') }}" class="btn btn-secondary">>> BACK</a>
+                    <a href="{{ url('Obat') }}" class="btn btn-secondary"> >> BACK </a>
                     <button type="submit" class="btn btn-primary" name="submit">SIMPAN</button>
                 </div>
             </div>
@@ -56,7 +63,7 @@
         </div>
         <!-- AKHIR FORM -->
 
-    {{-- <form method='post' action="{{ url('Obat') }}">
+    {{--    <form method='post' action="{{ url('Obat') }}">
          @csrf
 
          <div class="form-group">

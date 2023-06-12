@@ -13,34 +13,36 @@ class Cart extends Model
     use HasFactory;
 
     protected $table = 'carts';
-    protected $fillable = ['user_id' , 'product_id' , 'amount'];
+    protected $fillable = ['user_id' , 'product_id' , 'amount' , 'total_price'];
     
     // protected $guarded = ['id'];
-
     public static function getCartItems()
     {
-        if(Auth::check()){
-            $carts = Cart::with(['obat2' => function($query){
-                $query->select('id','kode_obat','nama_obat','satuan_obat','harga_obat','stock_obat');
-            }])->orderby('id', 'Desc')->where('user_id', Auth::user()->id)->get()->toArray();
-        } else {
-            $carts = Cart::with(['obat2' => function($query){
-                $query->select('id','kode_obat','nama_obat','satuan_obat','harga_obat','stock_obat');
-            }])->orderby('id', 'Desc')->where('session_id', Session::get('session_id'))->get()->toArray();
+            if (Auth::check()) {
+                $carts = Cart::with('obat2:id,kode_obat,nama_obat,satuan_obat,harga_obat,stock_obat')
+                    ->orderBy('id', 'DESC')
+                    ->where('user_id', Auth::user()->id)
+                    ->get()
+                    ->toArray();
+            } else {
+                $carts = Cart::with('obat2:id,kode_obat,nama_obat,satuan_obat,harga_obat,stock_obat')
+                    ->orderBy('id', 'DESC')
+                    ->where('session_id', Session::get('session_id'))
+                    ->get()
+                    ->toArray();
+            }
+
+            return $carts;
         }
-        return $carts;
-    }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+        public function user()
+        {
+            return $this->belongsTo(User::class, 'user_id');
+        }
 
-
-    public function obat2()
-    {
-        return $this->belongsTo(Obat2::class);
-    }
-
-    
-}
+        public function obat2()
+        {
+            return $this->belongsTo(Obat2::class, 'product_id');
+        }
+            
+        }

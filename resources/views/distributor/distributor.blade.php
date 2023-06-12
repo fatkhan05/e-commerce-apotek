@@ -22,11 +22,11 @@
           <td>{{$d->alamat}}</td>
           
           <td>
-            <a href="{{ url('Distributor/'.$d->id_suplier.'/edit')}}"class="btn btn-warning">Edit</a>
+            <a href="{{ url('Distributor/'.$d->id_suplier.'/edit')}}"class="btn btn-warning"><i data-feather="edit"></i></a>
             <form onsubmit="return confirm('Yakin Akan Menghapus Data?')" class="d-inline" action="{{ url('Distributor/'. $d->id_suplier) }}" method="post">
               @csrf
               @method('DELETE')
-                  <button type="submit" name="submit" class="btn btn-danger">Hapus</button>
+                  <button type="submit" name="submit" class="btn btn-danger"><i data-feather="trash-2"></i></button>
           </form>
           </td>
       </tr>

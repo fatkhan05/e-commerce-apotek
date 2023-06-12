@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use App\Models\Obat;
 use App\Models\Obat2;
 use App\Models\Order;
 use App\Models\Transaksi;
@@ -31,37 +30,39 @@ class OrderController extends Controller
 
     }
 
-    public function checkout()
-    {
-        $user_id = Auth::id();
-        $carts = Cart::where('user_id', $user_id)->get();
+    
 
-        if ($carts == null)
-        {
-            return Redirect::back();
-        }
+    // public function checkout()
+    // {
+    //     $user_id = Auth::id();
+    //     $carts = Cart::where('user_id', $user_id)->get();
 
-        $order = Order::create([
-            'user_id' => $user_id
-        ]);
+    //     if ($carts == null)
+    //     {
+    //         return Redirect::back();
+    //     }
 
-        foreach ($carts as $cart) {
-            $product = Obat2::find($cart->product_id);
-            $product->update([
-                'stock' => $product->stock - $cart->amount,
-            ]);
+    //     $order = Order::create([
+    //         'user_id' => $user_id
+    //     ]);
 
-            Transaksi::create([
-                'amount' => $cart->amount,
-                'product_id' => $cart->product_id,
-                'order_id' => $order->id,
-            ]);
+    //     foreach ($carts as $cart) {
+    //         $product = Obat2::find($cart->product_id);
+    //         $product->update([
+    //             'stock' => $product->stock - $cart->amount,
+    //         ]);
 
-            $cart->delete();
-        }
+    //         Transaksi::create([
+    //             'amount' => $cart->amount,
+    //             'product_id' => $cart->product_id,
+    //             'order_id' => $order->id,
+    //         ]);
 
-        return Redirect::route('show_order', $order);
-    }
+    //         $cart->delete();
+    //     }
+
+    //     return Redirect::route('show_order', $order);
+    // }
 
 
     public function update(Request $request)

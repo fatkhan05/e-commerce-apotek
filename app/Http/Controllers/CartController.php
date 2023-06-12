@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Obat2;
 use App\Models\Cart;
-use App\Models\Obat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -24,11 +23,10 @@ class CartController extends Controller
      }
 
      public function index()
-     {
-        // $carts = Cart::where('user_id', auth()->id())->with('obat2')->get();
+     {  
         $carts = Cart::getCartItems();
-        dd($carts);
-        // return view('cart.cart')->with(compact('carts'));
+        // dd($carts);
+        return view('cart.cart')->with(compact('carts'));
      }
 
     /**
@@ -38,70 +36,32 @@ class CartController extends Controller
      */
 
 
-    // public function addToCart(Request $request) {
-    //     $validateData = $request->validate([
-    //         'product_id' => 'required|exist:obat2,id',
-    //         'amount' => 'required|integer|min:1',
-    //     ]);
-
-    //     $cart = new Cart;
-    //     $cart->user_id = auth()->id;
-    //     $cart->product_id = $validateData['product_id'];
-    //     $cart->amount = $validateData['amount'];
-    //     $cart->save();
-
-    //     dd($cart->id);
-    // } 
-        
-    
-
-    public function addToCart(Obat2 $obat2, $id){
+    public function addToCart(Obat2 $obat2, $id)
+    {
         $user_id = Auth::id();
-
-        $cart = Cart::where('product_id', $obat2->kode_obat)->where('user_id', Auth::id())->first();
-        
+    
         $obat2 = Obat2::findOrFail($id);
-        // dd($obat2);
-        
-        $cart = session()->get('cart', []);
-        
-        if(!($cart = Session::get('cart'))) {             
-            $cart = [
-                    'id_obat' => $obat2->id,
-                    'kode_obat' => $obat2->kode_obat,
-                    'nama_obat' => $obat2->nama_obat,
-                    'satuan_obat' => $obat2->satuan_obat,
-                    'harga_obat' => $obat2->harga_obat,
-                    'quantity' => 1
-                ];
-            
-            } else {
-                Cart::create([
-                    'user_id' => $user_id,
-                    'product_id' => $obat2->kode_obat,
-                    'amount' => 1
-                ]);
-
-            }   
-            // session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang');
-  
-        
-        if(isset($cart[$id])) {
-            $cart[$obat2->id]['quantity']++;
-            session()->put('cart', $cart);
-        } 
-        $cart = [
-            'id_obat' => $obat2->id,
-            'kode_obat' => $obat2->kode_obat,
-            'nama_obat' => $obat2->nama_obat,
-            'satuan_obat' => $obat2->satuan_obat,
-            'harga_obat' => $obat2->harga_obat,
-            'quantity' => 1
-        ];
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang');       
+    
+        $cart = Cart::where('product_id', $obat2->id)
+                    ->where('user_id', $user_id)
+                    ->first();
+    
+        if (!$cart) {
+            Cart::create([
+                'user_id' => $user_id,
+                'product_id' => $obat2->id,
+                'total_price' => $obat2->harga_obat,
+                'amount' => 1
+            ]);
+        } else {
+            $cart->amount++;
+            $cart->total_price = $obat2->harga_obat * $cart->amount;
+            $cart->save();
+        }
+    
+        return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang');
     }
+    
 
         
     public function store()
@@ -117,22 +77,23 @@ class CartController extends Controller
     
     
     public function update_cart(Cart $cart, Request $request)
+{
+    $request->validate([
+        'amount' => 'required|gte:1|lte:' . $cart->obat2->stock_obat
+    ]);
+
+    $cart->update([
+        'amount' => $request->amount
+    ]);
+
+    return redirect()->route('cart.index')->with('success', 'Keranjang berhasil diperbarui');
+}
+
+    public function delete_cart($id)
     {
-        $request->validate([
-            'amount' => 'required|gte:1|lte:' . $cart->product->stock
-        ]);
-
-        $cart->update([
-            'amount' => $request->amount
-        ]);
-
-        return Redirect::route('cart.index');
-    }
-
-    public function delete_cart(Cart $cart)
-    {
+        $cart = Cart::findOrFail($id);
         $cart->delete();
-        return Redirect::route('/cart');
+        return redirect()->route('cart.index');
     }
 
 }

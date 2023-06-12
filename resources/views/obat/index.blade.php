@@ -12,6 +12,7 @@
         <th>Satuan Obat</th>
         <th>Harga Obat</th>
         <th>Stock Obat</th>
+        <th>IMAGE</th>
         <th>Action</th>
     </tr>
 
@@ -23,21 +24,26 @@
         <td>{{$o->satuan_obat}}</td>
         <td>{{$o->harga_obat}}</td>
         <td>{{$o->stock_obat}}</td>
-        
         <td>
-          <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-          <a href="{{ url('Obat/'.$o->id_obat.'/edit')}}"class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-          <form onsubmit="return confirm('Yakin Akan Menghapus Data?')" class="d-inline" action="{{ url('Obat/'. $o->id_obat) }}" method="post">
+            @if ($o->image)
+                <img style="max-width: 60px; max-height: 60px;" src="{{ url('foto').'/'.$o->image }}"/>
+            @endif
+        </td>
+        {{--  --}}
+        <td>
+          <a href="{{ url('obat-detail/'.$o->id) }}" class="btn btn-primary"><i data-feather="eye"></i></a>
+          <a href="{{ url('Obat/'.$o->id.'/edit')}}"class="btn btn-success"><i data-feather="edit"></i></a>
+          <form onsubmit="return confirm('Yakin Akan Menghapus Data?')" class="d-inline" action="{{ url('Obat/'. $o->id) }}" method="POST">
             @csrf
             @method('DELETE')
-                <button type="submit" name="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                <button type="submit" name="submit" class="btn btn-danger"><i data-feather="trash-2"></i></button>
         </form>
         </td>
     </tr>
 
     
     @endforeach
-    <a href="/Obat/create" class="btn btn-success"><i class="fa-solid fa-plus"></i> Tambah Obat </a>
+    <a href="/Obat/create" class="btn btn-success"><i data-feather="plus-circle"></i> Tambah Obat </a>
 </table>
 {{ $obat->links() }}
 </div>
