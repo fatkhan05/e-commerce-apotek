@@ -81,7 +81,7 @@
                     <td data-th="Harga">
                         <div class="row">                          
                             <div class="col-sm-9">
-                                <h4 class="nomargin">{{ $ct['obat2']['harga_obat'] }}</h4>
+                                <h4 class="nomargin">{{ $ct['obat2']['harga_obat'] * $ct['amount'] }}</h4>
                             </div>
                         </div>
                     </td>                    
@@ -228,7 +228,7 @@
                         onSuccess: function(result){
                             /* You may add your own implementation here */
                             // alert("payment success!"); 
-                            window.location.href = '/invoice/{{ $order->id }}'
+                            window.location.href = '/invoice/{{ encrypt($order->id) }}'
                             console.log(result);
                         },
                         onPending: function(result){

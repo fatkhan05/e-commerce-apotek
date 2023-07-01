@@ -9,7 +9,9 @@ class Transaksi extends Model
 {
     use HasFactory;
 
-    // protected $guarded = ['id'];
+    protected $table = 'transaksi_penjualan';
+    protected $primaryKey = 'id';
+    protected $fillable = ['amount' , 'order_id' , 'product_id'];
 
     public function order()
     {
@@ -21,7 +23,4 @@ class Transaksi extends Model
         return $this->belongsTo(Obat2::class, 'product_id');
     }
 
-        protected $table = 'transaksi_penjualan';
-
-        protected $fillable = ['amount' , 'order_id' , 'product_id'];
 }

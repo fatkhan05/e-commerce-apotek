@@ -64,8 +64,9 @@
                             </div>
                         </div>
                     </form>
+                  </div>
+                  <span class="text-center mb-3">Don't have an account? <a href="{{ url('register') }}">Create</a> </span>
                 </div>
-            </div>
         </div>
     </div>
 </div>

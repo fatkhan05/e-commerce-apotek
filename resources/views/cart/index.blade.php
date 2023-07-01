@@ -3,12 +3,9 @@
 
 <div class="container">
 
-    <h1 class="mt-5"><center>Pemesanan Obat</center></h1>
+    <h1 class="p-4 text-center">Pemesanan Obat</h1>
     
-<a href="{{ url('Cart/cart') }}" class="btn btn-success"><i data-feather="shopping-cart"></i></a>
-
-<form action="{{ url('Order') }}" method="POST">
-    @csrf
+<a href="{{ url('Cart/cart') }}" class="btn btn-primary"><i data-feather="shopping-cart"></i></a>
 
     <table class="table table-bordered table-hover table-striped mt-3">
         <thead>
@@ -31,13 +28,13 @@
         <td>{{$o->harga_obat}}</td>
         <td>{{$o->stock_obat}}</td>
         
-                    <td class="text-center">
-                        <form action="{{ route('cart.add', ['obat2' => $o->id, 'id' => $o->id]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $o->id }}">
-                            <button type="submit" class="rounded-pill">Add To Cart</button>
-                        </form>
-                    </td>
+        <td class="text-center">
+            <form action="{{ route('cart.add', ['obat2' => $o->id, 'id' => $o->id]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{ $o->id }}">
+                <button type="submit" class="rounded-pill">Add To Cart</button>
+            </form>
+        </td>
     </tr>
     @endforeach
     </table>

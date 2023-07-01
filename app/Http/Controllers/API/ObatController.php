@@ -34,21 +34,25 @@ class ObatController extends Controller
             'id' => 'required|unique:obat2,id',
             'kode_obat' => 'required',
             'nama_obat' => 'required',
+            'deskripsi' => 'required',
             'satuan_obat' => 'required',
             'harga_obat' => 'required',
             'stock_obat' => 'required',
+            'image' => 'required',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors(),422);
+            return response()->json($validator->errors(),500);
         }else{
             $obat2 = Obat2::create([
             'id' => $request->id,
             'kode_obat' => $request->kode_obat,
             'nama_obat' => $request->nama_obat,
+            'deskripsi' => $request->deskripsi,
             'satuan_obat' => $request->satuan_obat,
             'harga_obat' => $request->harga_obat,
             'stock_obat' => $request->stock_obat,
+            'image' => $request->image,
             ]);
 
             return new ObatResource(true, 'Data Berhasil Disimpan !', $obat2);
@@ -71,7 +75,7 @@ class ObatController extends Controller
         }else{
             return response()->json([
                 'message' => 'Data Not Found !'
-            ], 404);
+            ], 500);
         }
     }
 
@@ -91,6 +95,7 @@ class ObatController extends Controller
             'satuan_obat' => 'required',
             'harga_obat' => 'required',
             'stock_obat' => 'required',
+            'image' => 'required'
         ]);
 
         if($validator->fails()){
@@ -105,6 +110,7 @@ class ObatController extends Controller
                 $obat2->satuan_obat = $request->satuan_obat;
                 $obat2->harga_obat = $request->harga_obat;
                 $obat2->stock_obat = $request->stock_obat;
+                $obat2->image = $request->image;
                 $obat2->save();
 
                 return new ObatResource(true, 'Data Berhasil DiUpdate !', $obat2);
@@ -134,5 +140,10 @@ class ObatController extends Controller
                     'message' => 'Data Not Found !'
                 ]);
             }
+    }
+
+    public function stock(Obat2 $obat2) 
+    {
+        return response()->json(['stock_obat' => $obat2->stock_obat]);
     }
 }

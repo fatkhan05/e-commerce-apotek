@@ -30,7 +30,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return redirect()->intended('/Obat')->with('success', 'Login Success');
+            return redirect()->intended('/home')->with('success', 'Login Success');
         }
 
         return redirect()->back()->withErrors([

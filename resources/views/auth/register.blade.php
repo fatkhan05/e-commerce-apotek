@@ -69,6 +69,7 @@
                         </div>
                     </form>
                 </div>
+                <span class="text-center mb-3">Already have an account ? <a href="{{ url('login') }}">Login</a></span>
             </div>
         </div>
     </div>

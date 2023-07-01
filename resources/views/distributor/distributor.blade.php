@@ -3,7 +3,7 @@
 
 
 <div class="container" style="padding: 3rem;">
-    <h1>Distributor</h1>
+    <h3> <i data-feather="users"></i> Data Suplier</h3>
   
   <table class="table table-bordered table-hover table-striped mt-3">
       <tr>

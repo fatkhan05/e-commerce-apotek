@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
 use Faker\Core\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +23,7 @@ class ObatController extends Controller
     public function index()
     {
         $obat2 = Obat2::orderBy('id')->paginate(7);
-        // $obat = Obat::all()->paginate(5);
+
         return view('obat.index')->with('obat', $obat2);
     }
 
@@ -64,7 +65,6 @@ class ObatController extends Controller
             'foto' => 'required|mimes:jpg,jpeg,png,gif,jfif',
 
         ], [
-            // 'id_obat.required' => 'ID OBAT wajib diisi',
             'id_obat.unique' => 'ID OBAT sudah ada dalam database',
             'kode_obat.required' => 'KODE OBAT wajib diisi',
             'nama_obat.required' => 'NAMA OBAT wajib diisi',
@@ -81,13 +81,8 @@ class ObatController extends Controller
             $imageName = time().'-'.uniqid().'.'. $image->getClientOriginalExtension();
             $image->move('foto', $imageName);
         }
-        // $foto = $request->file('foto');
-        // $foto_ekstensi = $foto->extension();
-        // $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
-        // $foto->move(public_path('foto'), $foto_nama);
 
         $data = [
-            // 'id_obat' => $request->id_obat,
             'kode_obat' => $request->kode_obat,
             'nama_obat' => $request->nama_obat,
             'deskripsi' => $request->deskripsi,
@@ -150,12 +145,6 @@ class ObatController extends Controller
         return redirect()->to('Obat')->with('success', 'Berhasil Melakukan Update Data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Obat2::where('id', $id)->delete();

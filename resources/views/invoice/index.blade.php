@@ -27,7 +27,7 @@
         <table class="table table-hover table-condensed">
             <thead>
                 <tr class="text-center">
-                    <th>Id</th>
+                    <th>No</th>
                     <th>Product Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
@@ -40,8 +40,10 @@
                 $no = 1;
                 $subtotal = 0;
                 $subtotal += $order->total_price * $order->quantity;
-            @endphp
+                $totalAkhir = $subtotal;
+                @endphp
                 
+        @foreach ($orders as $o)
             <tr class="text-center">
                 <td data-th="Id">
                     <div class="row">
@@ -53,46 +55,47 @@
                 <td data-th="Product Name">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="normagin">{{ $order->product_name }}</h4>
+                            <h4 class="normagin">{{ $o->product_name }}</h4>
                         </div>
                     </div>
                 </td>
                 <td data-th="Price">
                     <div class="row">
                         <div class="col-sm-13">
-                            <h4 class="normagin">{{ $order->total_price }}</h4>
+                            <h4 class="normagin">{{ $o->total_price }}</h4>
                         </div>
                     </div>
                 </td>
                 <td data-th="Quantity">
                     <div class="row">
                         <div class="col-sm-11">
-                            <h4 class="normagin">{{ $order->quantity }}</h4>
+                            <h4 class="normagin">{{ $o->quantity }}</h4>
                         </div>
                     </div>
                 </td>
                 <td data-th="Subtotal">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="normagin">{{ $subtotal }}</h4>
+                            <h4 class="normagin">{{ $o->total_price }}</h4>
                         </div>
                     </div>
                 </td>
                 <td data-th="Status">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="normagin">{{ $order->status }}</h4>
+                            <h4 class="normagin">{{ $o->status }}</h4>
                         </div>
                     </div>
                 </td>
             </tr>
+        @endforeach
         </table>
         <div class="row">
             <div class="col">
                 <a href="{{ route('print.pdf', ['id' => $order->id]) }}" target="blank" class="btn btn-primary rounded-pill">Download</a>
             </div>
             <div class="col">
-                <h2 class="text-end"> Total Rp.{{ $order->total_price }}</h2>
+                <h2 class="text-end"> Total Rp.{{ $totalAkhir }}</h2>
             </div>
         </div>
     </div>

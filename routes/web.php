@@ -26,7 +26,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -61,17 +61,19 @@ Route::post('Order', [CheckOutController::class, 'index'])->name('Order');
 Route::get('Order', [CheckOutController::class, 'checkout'])->name('check_out');
 Route::get('/invoice/{id}', [CheckOutController::class, 'invoice'])->name('invoice');
 Route::get('/order/{id}/pdf', [CheckOutController::class, 'invoicePdf'])->name('print.pdf');
+Route::get('/dashboard/{id}/confirm', [DashboardController::class, 'confirm'])->name('orders.confirm');
 
 
 
 // Login and Register
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLogin'])->name('login');
-Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout.new');
 Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegister'])->name('showRegister');
 Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 
 // Dashboard
 Route::get('dashboard', [DashboardController::class, 'index']);
+Route::get('dashboard/index', [DashboardController::class, 'dashboard']);
 Route::get('/dashboard/forms', [DashboardController::class, 'forms'])->name('forms');
 Route::get('/dashboard/carts', [DashboardController::class, 'carts'])->name('carts');
 Route::get('/dashboard/table', [DashboardController::class, 'table'])->name('table');

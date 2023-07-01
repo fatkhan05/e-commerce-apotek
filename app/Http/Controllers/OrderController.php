@@ -30,40 +30,6 @@ class OrderController extends Controller
 
     }
 
-    
-
-    // public function checkout()
-    // {
-    //     $user_id = Auth::id();
-    //     $carts = Cart::where('user_id', $user_id)->get();
-
-    //     if ($carts == null)
-    //     {
-    //         return Redirect::back();
-    //     }
-
-    //     $order = Order::create([
-    //         'user_id' => $user_id
-    //     ]);
-
-    //     foreach ($carts as $cart) {
-    //         $product = Obat2::find($cart->product_id);
-    //         $product->update([
-    //             'stock' => $product->stock - $cart->amount,
-    //         ]);
-
-    //         Transaksi::create([
-    //             'amount' => $cart->amount,
-    //             'product_id' => $cart->product_id,
-    //             'order_id' => $order->id,
-    //         ]);
-
-    //         $cart->delete();
-    //     }
-
-    //     return Redirect::route('show_order', $order);
-    // }
-
 
     public function update(Request $request)
     {

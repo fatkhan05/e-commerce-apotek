@@ -282,20 +282,20 @@
                           <th>Id Trsansaksi</th>
                           <th>Id Barang</th>
                           <th>Jumlah</th>
-                          <th>Tanggal</th>
-                          <th>Status</th>
+                          {{-- <th>Tanggal</th> --}}
+                          {{-- <th>Status</th> --}}
                         </tr>
                       </thead>
                       <tbody>
                           @foreach ($transaksi as $item)
                               
                           <tr>
-                            <td>{{ $transaksi->id }}</td>
-                            <td>{{ $transaksi->order_id }}</td>
-                            <td>{{ $transaksi->product_id }}</td>
-                            <td>{{ $transaksi->amount }}</td>
-                            {{-- <td>{{ $transaksi->tatus }}</td> --}}
-                            <td><label class="badge badge-danger">Pending</label></td>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->order_id }}</td>
+                            <td>{{ $item->product_id }}</td>
+                            <td>{{ $item->amount }}</td>
+                            <td>{{ $item->status }}</td>
+                            {{-- <td><label class="badge badge-danger">Pending</label></td> --}}
                           </tr>
                           @endforeach
                       </tbody>

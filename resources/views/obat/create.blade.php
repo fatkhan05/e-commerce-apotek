@@ -15,17 +15,11 @@
         </div>
     @endif
 
-    <!-- START FORM -->
+    <!-- CREATE START -->
     <form action='{{ url('Obat') }}' method='post' enctype="multipart/form-data">
         @csrf
         <div class="my-3 p-4 bg-body rounded shadow-lg mb-5">
             <a href='{{ url('Obat') }}' class="btn btn-secondary"><i class="fa-solid fa-backward"></i></a>
-            {{-- <div class="mb-3 row">
-                <label for="id" class="col-sm-2 col-form-label">ID OBAT</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" name='id_obat' value="{{ Session::get('id_obat') }}" id="id_obat">
-                </div>
-            </div> --}}
             <div class="mb-3 row">
                 <label for="kode" class="col-sm-2 col-form-label">Kode Obat</label>
                 <div class="col-sm-10">
@@ -97,7 +91,10 @@
             </div>
           </form>
         </div>
-        <!-- AKHIR FORM -->
+        <!-- CREATE END -->
+        
+        
+        
     </div>
 
 @endsection

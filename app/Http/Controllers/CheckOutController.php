@@ -48,6 +48,7 @@ class CheckOutController extends Controller
                             
                             $product->update([
                                 'stock_obat' => $product->stock_obat - $cart->amount,
+                                'total_terjual' => $product->total_terjual + $cart->amount,
                             ]);
 
                             $order = Order::create([
@@ -56,7 +57,7 @@ class CheckOutController extends Controller
                                 'product_name' => $product->nama_obat,
                                 'quantity' => $cart->amount,
                                 'total_price' => $total_price,
-                                'snap_token' => null
+                                'snap_token' => null,
                             ]);
 
                             Transaksi::create([
@@ -115,22 +116,40 @@ class CheckOutController extends Controller
 
                 public function invoice($id)
                 {
-                    $order = Order::find($id);
+                    // $order = Order::where('id', decrypt($id))->firstOrFail();
 
-                    if (!$order) {
-                        abort(404); // Tampilkan halaman 404 jika order tidak ditemukan
-                    }
+                    // if (!$order) {
+                    //     abort(404); // Tampilkan halaman 404 jika order tidak ditemukan
+                    // }
 
-                    $subtotal = 0; 
-                    $carts = $order->carts;
+                    // $subtotal = 0; 
+                    // $carts = $order->carts;
 
-                    if($order && $order->carts) {
-                        foreach ($carts as $cart) {
-                            $subtotal += $cart->amount * $cart->obat2->harga_obat;
-                        }
-                    }
+                    // if($order && $order->carts) {
+                    //     foreach ($carts as $cart) {
+                    //         $subtotal += $cart->amount * $cart->obat2->harga_obat;
+                    //     }
+                    // }
                     
-                    return view('invoice.index', compact('order'));
+                    // return view('invoice.index', compact('order'));
+
+                    try {
+                        $orderID = decrypt($id);
+                        $order = Order::findOrFail($orderID);
+                        $orders = Order::where('order_id', $order->order_id)->get();
+                        $subtotal = 0;
+                        $carts = $order->carts;
+
+                        if ($order && $order->carts) {
+                            foreach ($carts as $cart) {
+                                $subtotal += $cart->amount * $cart->obat2->harga_obat;
+                            }
+                        }
+
+                        return view('invoice.index', compact('order', 'orders'));
+                    } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+                        abort(404);
+                    }
                 }
 
 
@@ -167,28 +186,6 @@ class CheckOutController extends Controller
 
                     return $pdf->stream($fileName, ['Attachment' => false]);
                 }
-
-
-
-
-
-
-    //     public function show(Order $order)
-    //     {
-    //     $snapToken = $order->snap_token;
-    //     if (empty($snapToken)) {
-    //         // Jika snap token masih NULL, buat token snap dan simpan ke database
- 
-    //         $midtrans = new CreateSnapTokenService($order);
-    //         $snapToken = $midtrans->getSnapToken();
-
- 
-    //         $order->snap_token = $snapToken;
-    //         $order->save();
-    //     }
- 
-    //     return view('order.check_out', compact('snapToken'));
-    // }
 
 
     public function render()

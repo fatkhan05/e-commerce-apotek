@@ -24,6 +24,6 @@ class Obat2 extends Model
 
     protected $table = 'obat2';
     protected $fillable = [
-        'id', 'kode_obat', 'nama_obat', 'deskripsi', 'satuan_obat', 'harga_obat', 'stock_obat', 'image'];
+        'id', 'kode_obat', 'nama_obat', 'deskripsi', 'satuan_obat', 'harga_obat', 'stock_obat', 'image', 'total_terjual'];
     public $timestamps = false;
 }

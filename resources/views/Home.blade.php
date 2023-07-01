@@ -2,28 +2,32 @@
 @section('container')
     
 <section class="hero" id="home">
-    <div class="row">
+        <div class="row">
         <div class="col">
             <h1 class="header">Kami Siap 24 Jam Untuk Anda</h1>
             <p>Jangan Khawatir, Semua kebutuhan Anda Akan Dilayani Oleh Profesional Team Yang Ahli Dibidangnya</p>
-            <a href="" class="btn btn-success rounded-pill">Selengkapnya <i class="fa-sharp fa-solid fa-arrow-right"></i></a>
+            <a href="" class="btn btn-primary rounded-pill">Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="col">
-            <img class="img" src="/img/hero.png" alt="">
+            <img class="img" src="/img/dokter2.jpg" alt="">
         </div>
     </div>
 </section>
 
-<section class="about">
-    <div class="row">
-        <div class="col">
-            <img src="" alt="Ilustrasi Tim Dokter">
+
+<div class="box position-relative">
+        <div class="image">
+            <img src="{{ asset('img/tim-dokter.png') }}" alt="Ilustrasi Tim Dokter" class="mb-5">
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
+        <div class="content">
             <h1>Tanya Dokter</h1>
+            <p>Dengan Tenaga Ahli Kami Siap 24 Jam Untuk Anda</p>
+            <a href="" class="btn btn-light rounded-pill">Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+            {{-- <button class="rounded-pill">Selengkapnya <i class="fa-solid fa-arrow-right"></i></button> --}}
         </div>
-    </div>
+</div>
+
+<section>
+
 </section>
 @endsection

@@ -14,7 +14,8 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::all();
+        $transaksi = Transaksi::orderBy('order_id')
+                        ->paginate(25);
 
         $totalAmount = 0;
             foreach ($transaksi as $item) {
