@@ -101,23 +101,8 @@
                     <li>Pesanan akan di proses selama 1-2 hari</li>
                 </ul>
 
-                <form id="pay-button" action="https://api.sandbox.midtrans.com/v1/transactions" method="POST">
-                    @csrf
-                    <input type="hidden" name="snapToken" value="{{ $snapToken }}">
-                    <button class="btn btn-primary rounded-pill" type="submit">Bayar Sekarang</button>
-                </form>
-                {{-- <form action="{{ route('Order')}}" method="POST">
-                    @csrf
-                    <input type="hidden" name="snapToken" value="{{ $snapToken }}">
-                    <button class="btn btn-primary rounded-pill" type="submit" id="pay-button">Bayar Sekarang</button>
-                </form> --}}
                 
-                
-                
-                {{-- <form action="{{ route('Order') }}"https://app.midtrans.com/snap/v1/transactions method="GET" >
-                    @csrf
-                    <button id="pay-button" class="btn btn-primary rounded-pill" >Check Out</button>
-                </form> --}}
+                <button class="btn btn-primary rounded-pill" type="submit" id="pay-button">Bayar Sekarang</button>
             
 
    
@@ -161,64 +146,8 @@
 
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
 </script>
-                    <script type="text/javascript"> 
-
-                        // var payButton = document.getElementById('pay-button');
-                        // var snap_token = "{{ $snapToken }}";
-
-                        // payButton.addEventListener('click', function () {
-                        // // Kirim permintaan ke server Midtrans untuk membuat link pembayaran
-                        // fetch('https://api.sandbox.midtrans.com/v1/transactions', {
-                        //     method: 'POST',
-                        //     headers: {
-                        //     'Accept': 'application/json',
-                        //     'Authorization': 'Basic' + btoa('SB-Mid-server-3A3TtJoYq6JW5ymG7pqGgSOj'),
-                        //     'Content-Type': 'application/json',
-                        //     },
-                        //     body: JSON.stringify({
-                        //     transaction_details: {
-                        //         order_id: 'concert-ticket-01',
-                        //         gross_amount: 100000
-                        //     },
-                        //     usage_limit: 2
-                        //     })
-                        // })
-                        // .then(function(response) {
-                        //     return response.json();
-                        // })
-                        // .then(function(data) {
-                        //     // Tangani data respons dari server Midtrans
-                        //     console.log(data);
-                        //     // Redirect ke halaman pembayaran atau lakukan tindakan lain
-                        //     window.location.href = data.redirect_url;
-                        // })
-                        // .catch(function(error) {
-                        //     // Tangani kesalahan yang terjadi selama permintaan
-                        //     console.log(error);
-                        // });
-                        // });
-
-                        // // Fungsi untuk menangani respons setelah pembayaran selesai di halaman Snap
-                        // function handlePaymentResult(result) {
-                        // if (result.status_code === '200') {
-                        //     // Pembayaran berhasil
-                        //     alert('Payment success!');
-                        //     console.log(result);
-                        // } else if (result.status_code === '201') {
-                        //     // Pembayaran dalam proses
-                        //     alert('Payment pending!');
-                        //     console.log(result);
-                        // } else {
-                        //     // Pembayaran gagal atau dibatalkan
-                        //     alert('Payment failed!');
-                        //     console.log(result);
-                        // }
-                        // }
-
-
-
-                        
-                         // For example trigger on button clicked, or any time you need
+                    <script type="text/javascript">         
+                 // For example trigger on button clicked, or any time you need
                     var payButton = document.getElementById('pay-button');
                     var snap_token = "{{ $snapToken}}";
                     var order_id = "{{ $order }}"

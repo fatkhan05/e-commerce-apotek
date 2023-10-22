@@ -87,7 +87,7 @@ class CheckOutController extends Controller
                                 'name' => 'Fatkhan Akbar',
                                 'email' => 'fatkhanakbar46@gmail.com',
                                 'phone' => '082264910605'
-                            ),
+                            )
                         );
                         
                         $snapToken = \Midtrans\Snap::getSnapToken($params);
