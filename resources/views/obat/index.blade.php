@@ -32,7 +32,8 @@
         {{--  --}}
         <td>
           <a href="{{ url('obat-detail/'.$o->id) }}" class="btn btn-primary"><i data-feather="eye"></i></a>
-          <a href="{{ $o->id.'/edit' }}" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalEdit-{{ $o->id }}"><i data-feather="edit"></i></a>
+          <a href="{{ url('Obat/'.$o->id.'/edit') }}" class="btn btn-warning"><i data-feather="edit"></i></a>
+          {{-- <a href="{{ $o->id.'/edit' }}" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalEdit-{{ $o->id }}"><i data-feather="edit"></i></a> --}}
           <form onsubmit="return confirm('Yakin Akan Menghapus Data?')" class="d-inline" action="{{ url('Obat/'. $o->id) }}" method="POST">
             @csrf
             @method('DELETE')
@@ -43,8 +44,11 @@
 
     
     @endforeach
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i data-feather="plus-circle"></i>Tambah Obat
-    </button>
+    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i data-feather="plus-circle"></i>Tambah Obat
+    </button> --}}
+    <a href="{{ url('Obat/create') }}" class="btn btn-primary"><i data-feather="plus-circle"></i>Tambah Obat
+    </a>
+    
 </table>
 {{ $obat->links() }}
 
@@ -83,10 +87,10 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <label for="deskripsi_obat" class="col-sm-2 col-form-label">DESKRIPSI OBAT</label>
                             <div class="col-sm-12">
-                                {{-- <input type="textarea" class="form-control" name='deskripsi' value="{{ Session::get('deskripsi') }}" id="deskripsi" style="height: 100%;"> --}}
+                                <input type="textarea" class="form-control" name='deskripsi' value="{{ Session::get('deskripsi') }}" id="deskripsi" style="height: 100%;">
                                 <div class="form-floating">
                                     @if ($errors -> has('deskripsi'))
                                 <div class="text-danger">
@@ -96,7 +100,7 @@
                                     <textarea class="form-control" name="deskripsi" value="{{ Session::get('deskripsi') }}" id="deskripsi" style="height: 100px"></textarea>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="satuan_obat" class="col-sm-2 col-form-label">SATUAN OBAT</label>
                             <div class="col-sm-12">
@@ -274,6 +278,8 @@
         <!-- MODAL EDIT END -->
 
 </div>
+
+    
 
 @endsection
 
