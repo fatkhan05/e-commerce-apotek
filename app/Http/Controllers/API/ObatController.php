@@ -34,11 +34,11 @@ class ObatController extends Controller
             'id' => 'required|unique:obat2,id',
             'kode_obat' => 'required',
             'nama_obat' => 'required',
-            'deskripsi' => 'required',
+            // 'deskripsi' => 'required',
             'satuan_obat' => 'required',
             'harga_obat' => 'required',
             'stock_obat' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
         ]);
 
         if($validator->fails()){
@@ -48,11 +48,11 @@ class ObatController extends Controller
             'id' => $request->id,
             'kode_obat' => $request->kode_obat,
             'nama_obat' => $request->nama_obat,
-            'deskripsi' => $request->deskripsi,
+            // 'deskripsi' => $request->deskripsi,
             'satuan_obat' => $request->satuan_obat,
             'harga_obat' => $request->harga_obat,
             'stock_obat' => $request->stock_obat,
-            'image' => $request->image,
+            // 'image' => $request->image,
             ]);
 
             return new ObatResource(true, 'Data Berhasil Disimpan !', $obat2);
